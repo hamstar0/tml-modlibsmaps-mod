@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -8,7 +7,6 @@ using Terraria.ModLoader;
 using ModLibsCore.Classes.Loadable;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Libraries.DotNET.Extensions;
-using ModLibsCore.Services.Hooks.LoadHooks;
 
 
 namespace ModLibsMaps.Services.Maps {
@@ -94,31 +92,6 @@ namespace ModLibsMaps.Services.Maps {
 			}
 
 			return new Dictionary<string, MapMarker>( markersAt );
-		}
-
-
-
-		////////////////
-
-		private IDictionary<int, IDictionary<int, IDictionary<string, MapMarker>>> Markers
-			= new ConcurrentDictionary<int, IDictionary<int, IDictionary<string, MapMarker>>>();
-
-		private IDictionary<string, (int, int, MapMarker)> MarkersPerLabel
-			= new ConcurrentDictionary<string, (int, int, MapMarker)>();
-
-
-
-		////////////////
-
-		void ILoadable.OnModsLoad() { }
-
-		void ILoadable.OnModsUnload() { }
-
-		void ILoadable.OnPostModsLoad() {
-			LoadHooks.AddWorldUnloadEachHook( () => {
-				this.Markers.Clear();
-				this.MarkersPerLabel.Clear();
-			} );
 		}
 	}
 }
