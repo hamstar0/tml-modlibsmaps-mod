@@ -12,7 +12,7 @@ namespace ModLibsMaps {
 
 
 		////////////////
-
+		
 		public override void Load() {
 			ModLibsMapsMod.Instance = this;
 		}
@@ -25,6 +25,20 @@ namespace ModLibsMaps {
 			} catch { }
 
 			ModLibsMapsMod.Instance = null;
+		}
+
+
+		////////////////
+
+		public override void MidUpdateTimeWorld() {
+			var config = ModLibsConfig.Instance;
+
+			if( config.DebugModeInfo ) {
+				int count = config.DebugModeInfoQuantity;
+				for( int i=0; i<count; i++ ) {
+
+				}
+			}
 		}
 	}
 }

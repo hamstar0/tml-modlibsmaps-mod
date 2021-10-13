@@ -15,7 +15,7 @@ namespace ModLibsMaps.Services.Maps {
 	/// <summary>
 	/// Provides functions for adding markers to the map.
 	/// </summary>
-	public partial class MapMarkers : ILoadable {
+	partial class MapMarkersManager : ILoadable {
 		/// <summary>Adds or updates a given map marker by id.</summary>
 		/// <param name="id">Must be unique.</param>
 		/// <param name="tileX"></param>
@@ -23,11 +23,11 @@ namespace ModLibsMaps.Services.Maps {
 		/// <param name="icon"></param>
 		/// <param name="scale"></param>
 		public static void SetFullScreenMapMarker( string id, int tileX, int tileY, Texture2D icon, float scale ) {
-			var markers = ModContent.GetInstance<MapMarkers>();
+			var markers = ModContent.GetInstance<MapMarkersManager>();
 			var marker = new MapMarker( id, icon, scale );
 			
 			if( markers.MarkersPerLabel.ContainsKey(id) ) {
-				MapMarkers.RemoveFullScreenMapMarker( id );
+				MapMarkersManager.RemoveFullScreenMapMarker( id );
 			}
 
 			if( !markers.Markers.ContainsKey(tileX) ) {
@@ -46,7 +46,7 @@ namespace ModLibsMaps.Services.Maps {
 		/// <param name="id"></param>
 		/// <returns></returns>
 		public static bool RemoveFullScreenMapMarker( string id ) {
-			var markers = ModContent.GetInstance<MapMarkers>();
+			var markers = ModContent.GetInstance<MapMarkersManager>();
 
 			(int x, int y, MapMarker marker) marker;
 			if( !markers.MarkersPerLabel.TryGetValue( id, out marker ) ) {
@@ -66,7 +66,7 @@ namespace ModLibsMaps.Services.Maps {
 		/// <summary></summary>
 		/// <returns></returns>
 		public static IList<string> GetFullScreenMapMarkerLabels() {
-			var markers = ModContent.GetInstance<MapMarkers>();
+			var markers = ModContent.GetInstance<MapMarkersManager>();
 			return markers.MarkersPerLabel.Keys.ToList();
 		}
 
@@ -76,7 +76,7 @@ namespace ModLibsMaps.Services.Maps {
 		/// <param name="markerAt"></param>
 		/// <returns></returns>
 		public static bool TryGetFullScreenMapMarker( string id, out (int tileX, int tileY, MapMarker marker) markerAt ) {
-			var markers = ModContent.GetInstance<MapMarkers>();
+			var markers = ModContent.GetInstance<MapMarkersManager>();
 
 			return markers.MarkersPerLabel.TryGetValue( id, out markerAt );
 		}
@@ -87,7 +87,7 @@ namespace ModLibsMaps.Services.Maps {
 		/// <param name="tileY"></param>
 		/// <returns></returns>
 		public static IDictionary<string, MapMarker> GetFullScreenMapMakersAt( int tileX, int tileY ) {
-			var markers = ModContent.GetInstance<MapMarkers>();
+			var markers = ModContent.GetInstance<MapMarkersManager>();
 			var markersAt = markers.Markers.Get2DOrDefault( tileX, tileY );
 			if( markersAt == null ) {
 				return null;
