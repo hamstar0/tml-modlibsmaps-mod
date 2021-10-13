@@ -17,5 +17,8 @@
     <Reference Include="ModLibsCore">
       <HintPath>..\..\..\Mod Libs Core\Project\ModLibsCore\bin\Release\net452\ModLibsCore.dll</HintPath>
     </Reference>
+    <Reference Include="ModLibsGeneral">
+      <HintPath>..\..\..\Mod Libs General\Project\ModLibsGeneral\bin\Release\net452\ModLibsGeneral.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
