@@ -1,1 +1,3 @@
 Supplies services for interacting with the in-game map.
+
+Note: This is a WIP mod.
